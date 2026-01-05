@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Repertoire UICI</string>
+    <string name="app_logo">Logo de l\'application</string>
+
+    <!-- MainActivity -->
+    <string name="mes_contacts">Mes Contacts</string>
+    <string name="aucun_contact">Aucun contact enregistré</string>
+    <string name="ajouter_contact">Ajouter un contact</string>
+
+    <!-- AddContactActivity -->
+    <string name="nom">Nom *</string>
+    <string name="prenoms">Prénoms *</string>
+    <string name="telephone">Téléphone *</string>
+    <string name="email">Email</string>
+    <string name="lieu_habitation">Lieu d\'habitation</string>
+    <string name="coordonnees_gps">Coordonnées GPS (optionnel)</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="enregistrer">Enregistrer</string>
+    <string name="annuler">Annuler</string>
+
+    <!-- Contact Item -->
+    <string name="appeler">Appeler</string>
+    <string name="envoyer_sms">Envoyer SMS</string>
+    <string name="voir_localisation">Voir la localisation</string>
+    <string name="supprimer">Supprimer</string>
+</resources>
