@@ -3,13 +3,12 @@ plugins {
 }
 
 android {
-    namespace = "com.uici.repertoire"
-    compileSdk = 34
+    compileSdk = 30
 
     defaultConfig {
         applicationId = "com.uici.repertoire"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 30
         versionCode = 1
         versionName = "1.0"
 
