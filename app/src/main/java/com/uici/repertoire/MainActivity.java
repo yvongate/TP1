@@ -115,18 +115,13 @@ public class MainActivity extends AppCompatActivity implements ContactAdapter.On
 
     @Override
     public void onLocationClick(Contact contact) {
-        if (contact.getLatitude() != 0.0 && contact.getLongitude() != 0.0) {
-            String uri = String.format("geo:%f,%f?q=%f,%f(%s)",
-                    contact.getLatitude(), contact.getLongitude(),
-                    contact.getLatitude(), contact.getLongitude(),
-                    contact.getLieuHabitation());
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-            intent.setPackage("com.google.android.apps.maps");
+        String lienMap = contact.getLienMap();
+        if (lienMap != null && !lienMap.isEmpty()) {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(lienMap));
             if (intent.resolveActivity(getPackageManager()) != null) {
                 startActivity(intent);
             } else {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-                startActivity(browserIntent);
+                Toast.makeText(this, "Impossible d'ouvrir le lien", Toast.LENGTH_SHORT).show();
             }
         } else {
             Toast.makeText(this, "Localisation non disponible", Toast.LENGTH_SHORT).show();

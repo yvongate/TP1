@@ -38,8 +38,7 @@ public class AddContactActivity extends AppCompatActivity {
         String email = binding.editTextEmail.getText().toString().trim();
         String telephone = binding.editTextTelephone.getText().toString().trim();
         String lieuHabitation = binding.editTextLieuHabitation.getText().toString().trim();
-        String latitudeStr = binding.editTextLatitude.getText().toString().trim();
-        String longitudeStr = binding.editTextLongitude.getText().toString().trim();
+        String lienMap = binding.editTextLienMap.getText().toString().trim();
 
         if (nom.isEmpty() || prenoms.isEmpty() || telephone.isEmpty()) {
             Toast.makeText(this, "Veuillez remplir tous les champs obligatoires", Toast.LENGTH_SHORT).show();
@@ -56,21 +55,6 @@ public class AddContactActivity extends AppCompatActivity {
             return;
         }
 
-        double latitude = 0.0;
-        double longitude = 0.0;
-
-        try {
-            if (!latitudeStr.isEmpty()) {
-                latitude = Double.parseDouble(latitudeStr);
-            }
-            if (!longitudeStr.isEmpty()) {
-                longitude = Double.parseDouble(longitudeStr);
-            }
-        } catch (NumberFormatException e) {
-            Toast.makeText(this, "Coordonnées GPS invalides", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
         Contact contact = new Contact(
                 UUID.randomUUID().toString(),
                 nom,
@@ -78,8 +62,7 @@ public class AddContactActivity extends AppCompatActivity {
                 email,
                 telephone,
                 lieuHabitation,
-                latitude,
-                longitude
+                lienMap
         );
 
         contactManager.addContact(contact);

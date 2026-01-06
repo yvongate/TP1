@@ -99,53 +99,22 @@
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/textViewCoordinates"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/coordonnees_gps"
-            android:textColor="@color/text_primary"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayoutLieuHabitation" />
-
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutLatitude"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="@string/latitude"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textViewCoordinates">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextLatitude"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal|numberSigned" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutLongitude"
+            android:id="@+id/textInputLayoutLienMap"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:hint="@string/longitude"
+            android:hint="@string/lien_google_maps"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayoutLatitude">
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutLieuHabitation">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextLongitude"
+                android:id="@+id/editTextLienMap"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal|numberSigned" />
+                android:inputType="textUri" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -159,7 +128,7 @@
             android:textColor="@color/white"
             app:layout_constraintEnd_toStartOf="@id/buttonCancel"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayoutLongitude" />
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutLienMap" />
 
         <Button
             android:id="@+id/buttonCancel"
@@ -172,7 +141,7 @@
             android:textColor="@color/primary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/buttonSave"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayoutLongitude" />
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutLienMap" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

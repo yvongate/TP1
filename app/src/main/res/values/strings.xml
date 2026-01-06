@@ -13,9 +13,7 @@
     <string name="telephone">Téléphone *</string>
     <string name="email">Email</string>
     <string name="lieu_habitation">Lieu d\'habitation</string>
-    <string name="coordonnees_gps">Coordonnées GPS (optionnel)</string>
-    <string name="latitude">Latitude</string>
-    <string name="longitude">Longitude</string>
+    <string name="lien_google_maps">Lien Google Maps (optionnel)</string>
     <string name="enregistrer">Enregistrer</string>
     <string name="annuler">Annuler</string>
 

@@ -10,19 +10,17 @@ public class Contact implements Parcelable {
     private String email;
     private String telephone;
     private String lieuHabitation;
-    private double latitude;
-    private double longitude;
+    private String lienMap;
 
     public Contact(String id, String nom, String prenoms, String email, String telephone,
-                   String lieuHabitation, double latitude, double longitude) {
+                   String lieuHabitation, String lienMap) {
         this.id = id;
         this.nom = nom;
         this.prenoms = prenoms;
         this.email = email;
         this.telephone = telephone;
         this.lieuHabitation = lieuHabitation;
-        this.latitude = latitude;
-        this.longitude = longitude;
+        this.lienMap = lienMap;
     }
 
     protected Contact(Parcel in) {
@@ -32,8 +30,7 @@ public class Contact implements Parcelable {
         email = in.readString();
         telephone = in.readString();
         lieuHabitation = in.readString();
-        latitude = in.readDouble();
-        longitude = in.readDouble();
+        lienMap = in.readString();
     }
 
     public static final Creator<Contact> CREATOR = new Creator<Contact>() {
@@ -72,12 +69,8 @@ public class Contact implements Parcelable {
         return lieuHabitation;
     }
 
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
+    public String getLienMap() {
+        return lienMap;
     }
 
     @Override
@@ -93,7 +86,6 @@ public class Contact implements Parcelable {
         dest.writeString(email);
         dest.writeString(telephone);
         dest.writeString(lieuHabitation);
-        dest.writeDouble(latitude);
-        dest.writeDouble(longitude);
+        dest.writeString(lienMap);
     }
 }
