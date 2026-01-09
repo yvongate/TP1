@@ -1,0 +1,397 @@
+================================================================================
+                    GUIDE PAR ÉCRAN - Repertoire UICI
+================================================================================
+
+Ce document explique chaque écran de l'application: à quoi il sert et comment
+il fonctionne.
+
+================================================================================
+ÉCRAN 1: ÉCRAN DE DÉMARRAGE (SPLASH SCREEN)
+================================================================================
+
+À QUOI ÇA SERT:
+---------------
+Premier écran qui s'affiche quand on lance l'application. Il montre le logo
+pendant 3 secondes puis passe automatiquement à l'écran principal.
+
+FICHIERS UTILISÉS:
+------------------
+1. SplashActivity.java - Le code
+2. activity_splash.xml - L'interface visuelle
+
+CODE PRINCIPAL (SplashActivity.java):
+--------------------------------------
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_splash);
+
+    new Handler(Looper.getMainLooper()).postDelayed(() -> {
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
+    }, 3000);
+}
+
+COMMENT ÇA MARCHE:
+------------------
+1. Affiche le layout activity_splash.xml (logo au centre)
+2. Attend 3000 millisecondes (3 secondes)
+3. Lance MainActivity (écran principal)
+4. Se ferme automatiquement (finish)
+
+ÉLÉMENTS VISUELS:
+-----------------
+- Logo UICI centré
+- Fond bleu
+- Nom de l'application en dessous
+
+
+================================================================================
+ÉCRAN 2: LISTE DES CONTACTS (ÉCRAN PRINCIPAL)
+================================================================================
+
+À QUOI ÇA SERT:
+---------------
+Affiche tous les contacts enregistrés dans une liste. Permet d'appeler, envoyer
+un SMS, voir la localisation ou supprimer un contact. Bouton + pour ajouter un
+nouveau contact.
+
+FICHIERS UTILISÉS:
+------------------
+1. MainActivity.java - Le code principal
+2. ContactAdapter.java - Affichage de chaque contact
+3. ContactManager.java - Récupération des contacts sauvegardés
+4. activity_main.xml - L'interface de l'écran
+5. item_contact.xml - L'interface d'une carte de contact
+
+COMMENT ÇA DÉMARRE (onCreate):
+-------------------------------
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    binding = ActivityMainBinding.inflate(getLayoutInflater());
+    setContentView(binding.getRoot());
+
+    contactManager = new ContactManager(this);
+    loadContacts();
+    setupRecyclerView();
+    setupFab();
+}
+
+→ Crée l'interface
+→ Récupère les contacts sauvegardés
+→ Prépare la liste pour afficher les contacts
+→ Configure le bouton +
+
+CHARGER LES CONTACTS (loadContacts):
+-------------------------------------
+private void loadContacts() {
+    contacts.clear();
+    contacts.addAll(contactManager.getContacts());
+    contactAdapter.notifyDataSetChanged();
+    updateEmptyState();
+}
+
+→ Vide la liste actuelle
+→ Récupère tous les contacts depuis le stockage
+→ Rafraîchit l'affichage
+→ Affiche "Aucun contact" si la liste est vide
+
+BOUTON APPELER (onCallClick):
+------------------------------
+public void onCallClick(Contact contact) {
+    // Vérifie si on a la permission
+    if (pas de permission) {
+        demander la permission
+    } else {
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:" + numéro));
+        startActivity(intent);
+    }
+}
+
+→ Vérifie la permission CALL_PHONE
+→ Ouvre l'application téléphone avec le numéro
+
+BOUTON SMS (onSmsClick):
+-------------------------
+→ Même principe que l'appel
+→ Ouvre l'application SMS avec le numéro pré-rempli
+
+BOUTON LOCALISATION (onLocationClick):
+---------------------------------------
+public void onLocationClick(Contact contact) {
+    String lienMap = contact.getLienMap();
+    if (lien existe) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(lien));
+        startActivity(intent);
+    } else {
+        afficher "Localisation non disponible"
+    }
+}
+
+→ Récupère le lien Google Maps du contact
+→ Ouvre le lien dans Google Maps ou le navigateur
+
+BOUTON SUPPRIMER (onDeleteClick):
+----------------------------------
+public void onDeleteClick(Contact contact) {
+    AlertDialog → "Voulez-vous vraiment supprimer ?"
+    Si OUI:
+        contactManager.deleteContact(id);
+        loadContacts();
+        afficher "Contact supprimé"
+}
+
+→ Affiche une boîte de confirmation
+→ Si l'utilisateur confirme, supprime le contact et rafraîchit la liste
+
+BOUTON + (fabAddContact):
+--------------------------
+binding.fabAddContact.setOnClickListener(v -> {
+    startActivity(new Intent(this, AddContactActivity.class));
+});
+
+→ Ouvre l'écran d'ajout de contact
+
+AFFICHAGE DES CONTACTS (ContactAdapter):
+-----------------------------------------
+Pour chaque contact, le ContactAdapter crée une carte qui affiche:
+- Nom complet (nom + prénoms)
+- Numéro de téléphone
+- Email (ou "Pas d'email")
+- Lieu d'habitation (ou "Pas de localisation")
+- 4 boutons: Appeler, SMS, Localisation, Supprimer
+
+
+================================================================================
+ÉCRAN 3: AJOUTER UN CONTACT
+================================================================================
+
+À QUOI ÇA SERT:
+---------------
+Permet d'ajouter un nouveau contact en remplissant un formulaire.
+
+FICHIERS UTILISÉS:
+------------------
+1. AddContactActivity.java - Le code
+2. ContactManager.java - Sauvegarde du nouveau contact
+3. activity_add_contact.xml - L'interface du formulaire
+
+COMMENT ÇA DÉMARRE (onCreate):
+-------------------------------
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    binding = ActivityAddContactBinding.inflate(getLayoutInflater());
+    setContentView(binding.getRoot());
+
+    getSupportActionBar().setTitle("Nouveau Contact");
+
+    contactManager = new ContactManager(this);
+
+    binding.buttonSave.setOnClickListener(v -> saveContact());
+    binding.buttonCancel.setOnClickListener(v -> finish());
+}
+
+→ Crée le formulaire
+→ Change le titre en "Nouveau Contact"
+→ Configure les boutons Enregistrer et Annuler
+
+ENREGISTRER UN CONTACT (saveContact):
+--------------------------------------
+private void saveContact() {
+    // 1. Récupérer les valeurs des champs
+    String nom = binding.editTextNom.getText().toString().trim();
+    String prenoms = binding.editTextPrenoms.getText().toString().trim();
+    String telephone = binding.editTextTelephone.getText().toString().trim();
+    String email = binding.editTextEmail.getText().toString().trim();
+    String lieuHabitation = binding.editTextLieuHabitation.getText().toString().trim();
+    String lienMap = binding.editTextLienMap.getText().toString().trim();
+
+    // 2. Vérifier que les champs obligatoires sont remplis
+    if (nom vide OU prenoms vide OU telephone vide) {
+        afficher "Veuillez remplir tous les champs obligatoires"
+        arrêter
+    }
+
+    // 3. Vérifier que le téléphone est valide
+    if (!isValidPhoneNumber(telephone)) {
+        afficher "Numéro de téléphone invalide"
+        arrêter
+    }
+
+    // 4. Vérifier l'email s'il est renseigné
+    if (email pas vide ET email invalide) {
+        afficher "Adresse email invalide"
+        arrêter
+    }
+
+    // 5. Créer le contact
+    Contact contact = new Contact(
+        UUID.randomUUID().toString(),  // ID unique
+        nom,
+        prenoms,
+        email,
+        telephone,
+        lieuHabitation,
+        lienMap
+    );
+
+    // 6. Sauvegarder et retourner à l'écran principal
+    contactManager.addContact(contact);
+    afficher "Contact enregistré"
+    finish();  // Retourne à MainActivity
+}
+
+VALIDATIONS:
+------------
+1. isValidPhoneNumber(telephone):
+   → Vérifie que le numéro contient entre 8 et 15 chiffres
+   → Peut commencer par un +
+
+2. isValidEmail(email):
+   → Vérifie que l'email est au bon format (xxx@xxx.xxx)
+
+BOUTON ANNULER:
+---------------
+→ Ferme simplement l'écran sans rien sauvegarder
+→ Retourne à MainActivity
+
+
+================================================================================
+COMMENT LES DONNÉES SONT SAUVEGARDÉES
+================================================================================
+
+FICHIER: ContactManager.java
+
+SAUVEGARDER (saveContacts):
+----------------------------
+public void saveContacts(List<Contact> contacts) {
+    String json = gson.toJson(contacts);
+    sharedPreferences.edit().putString("contacts", json).apply();
+}
+
+COMMENT ÇA MARCHE:
+1. Convertit la liste de contacts en texte JSON
+2. Sauvegarde ce texte dans SharedPreferences (stockage permanent)
+
+RÉCUPÉRER (getContacts):
+-------------------------
+public List<Contact> getContacts() {
+    String json = sharedPreferences.getString("contacts", null);
+    if (json existe) {
+        retourner la liste convertie depuis JSON
+    } else {
+        retourner une liste vide
+    }
+}
+
+COMMENT ÇA MARCHE:
+1. Récupère le texte JSON depuis le stockage
+2. Convertit le JSON en liste de contacts
+3. Si rien n'existe, retourne une liste vide
+
+AJOUTER UN CONTACT (addContact):
+---------------------------------
+public void addContact(Contact contact) {
+    List<Contact> contacts = getContacts();
+    contacts.add(contact);
+    saveContacts(contacts);
+}
+
+COMMENT ÇA MARCHE:
+1. Récupère la liste actuelle
+2. Ajoute le nouveau contact
+3. Sauvegarde la liste complète
+
+SUPPRIMER UN CONTACT (deleteContact):
+--------------------------------------
+public void deleteContact(String contactId) {
+    List<Contact> contacts = getContacts();
+    contacts.removeIf(contact -> contact.getId().equals(contactId));
+    saveContacts(contacts);
+}
+
+COMMENT ÇA MARCHE:
+1. Récupère la liste actuelle
+2. Supprime le contact avec l'ID correspondant
+3. Sauvegarde la liste mise à jour
+
+
+================================================================================
+MODÈLE DE DONNÉES
+================================================================================
+
+FICHIER: Contact.java
+
+UN CONTACT CONTIENT:
+--------------------
+- id: Identifiant unique (généré automatiquement)
+- nom: Nom de famille
+- prenoms: Prénoms
+- telephone: Numéro de téléphone
+- email: Adresse email
+- lieuHabitation: Où habite la personne
+- lienMap: Lien Google Maps vers sa localisation
+
+CRÉER UN CONTACT:
+-----------------
+Contact contact = new Contact(
+    "id-unique",
+    "Kouadio",
+    "Jean Marc",
+    "jean@email.com",
+    "+2250123456789",
+    "Cocody",
+    "https://maps.app.goo.gl/xxxxx"
+);
+
+LIRE LES INFORMATIONS:
+----------------------
+String nom = contact.getNom();
+String telephone = contact.getTelephone();
+String email = contact.getEmail();
+// etc...
+
+
+================================================================================
+RÉSUMÉ DES FLUX
+================================================================================
+
+AJOUTER UN CONTACT:
+-------------------
+1. Utilisateur clique sur le bouton + (MainActivity)
+2. Ouvre AddContactActivity
+3. Utilisateur remplit le formulaire
+4. Clique sur "Enregistrer"
+5. Validation des données
+6. Création d'un objet Contact
+7. ContactManager sauvegarde le contact
+8. Retour à MainActivity
+9. La liste se rafraîchit automatiquement (onResume)
+
+APPELER UN CONTACT:
+-------------------
+1. Utilisateur clique sur le bouton téléphone
+2. Vérification de la permission CALL_PHONE
+3. Si pas de permission: demander
+4. Si permission accordée: lancer l'application téléphone
+5. Le numéro est pré-rempli
+
+SUPPRIMER UN CONTACT:
+---------------------
+1. Utilisateur clique sur le bouton poubelle
+2. Affichage d'une boîte de confirmation
+3. Si "Oui": ContactManager supprime le contact
+4. La liste se rafraîchit
+5. Message "Contact supprimé"
+
+VOIR LA LOCALISATION:
+----------------------
+1. Utilisateur clique sur le bouton localisation
+2. Récupération du lien Google Maps
+3. Si le lien existe: ouvrir dans Google Maps
+4. Sinon: afficher "Localisation non disponible"
+
+
+================================================================================
+FIN DU GUIDE
+================================================================================
