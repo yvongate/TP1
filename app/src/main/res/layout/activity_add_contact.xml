@@ -16,6 +16,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/nom"
+            app:boxStrokeColor="@color/primary"
+            app:boxStrokeWidth="2dp"
+            app:hintTextColor="@color/primary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -24,7 +27,10 @@
                 android:id="@+id/editTextNom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textColor="@color/text_primary"
+                android:textSize="20sp"
+                android:minHeight="60dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -32,8 +38,11 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:hint="@string/prenoms"
+            app:boxStrokeColor="@color/primary"
+            app:boxStrokeWidth="2dp"
+            app:hintTextColor="@color/primary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textInputLayoutNom">
@@ -42,7 +51,10 @@
                 android:id="@+id/editTextPrenoms"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textColor="@color/text_primary"
+                android:textSize="20sp"
+                android:minHeight="60dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -50,8 +62,11 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:hint="@string/telephone"
+            app:boxStrokeColor="@color/primary"
+            app:boxStrokeWidth="2dp"
+            app:hintTextColor="@color/primary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textInputLayoutPrenoms">
@@ -60,7 +75,10 @@
                 android:id="@+id/editTextTelephone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="phone" />
+                android:inputType="phone"
+                android:textColor="@color/text_primary"
+                android:textSize="20sp"
+                android:minHeight="60dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -68,8 +86,11 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:hint="@string/email"
+            app:boxStrokeColor="@color/primary"
+            app:boxStrokeWidth="2dp"
+            app:hintTextColor="@color/primary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textInputLayoutTelephone">
@@ -78,7 +99,10 @@
                 android:id="@+id/editTextEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:textColor="@color/text_primary"
+                android:textSize="20sp"
+                android:minHeight="60dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -86,8 +110,11 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:hint="@string/lieu_habitation"
+            app:boxStrokeColor="@color/primary"
+            app:boxStrokeWidth="2dp"
+            app:hintTextColor="@color/primary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textInputLayoutEmail">
@@ -96,7 +123,10 @@
                 android:id="@+id/editTextLieuHabitation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textColor="@color/text_primary"
+                android:textSize="20sp"
+                android:minHeight="60dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -104,8 +134,11 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:hint="@string/lien_google_maps"
+            app:boxStrokeColor="@color/primary"
+            app:boxStrokeWidth="2dp"
+            app:hintTextColor="@color/primary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textInputLayoutLieuHabitation">
@@ -114,18 +147,23 @@
                 android:id="@+id/editTextLienMap"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textUri" />
+                android:inputType="textUri"
+                android:textColor="@color/text_primary"
+                android:textSize="20sp"
+                android:minHeight="60dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/buttonSave"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             android:backgroundTint="@color/primary"
             android:text="@string/enregistrer"
             android:textColor="@color/white"
+            android:textSize="20sp"
+            android:minHeight="64dp"
             app:layout_constraintEnd_toStartOf="@id/buttonCancel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textInputLayoutLienMap" />
@@ -136,9 +174,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
             android:text="@string/annuler"
             android:textColor="@color/primary"
+            android:textSize="20sp"
+            android:minHeight="64dp"
+            app:strokeWidth="2dp"
+            app:strokeColor="@color/primary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/buttonSave"
             app:layout_constraintTop_toBottomOf="@id/textInputLayoutLienMap" />
