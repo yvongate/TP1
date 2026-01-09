@@ -29,9 +29,11 @@
         <item name="hintTextAppearance">@style/HintTextAppearance</item>
     </style>
 
-    <!-- Style pour le hint (label) -->
+    <!-- Style pour le hint (label) quand le champ est vide -->
     <style name="HintTextAppearance" parent="TextAppearance.MaterialComponents.Subtitle1">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <!-- Style pour les boutons -->
